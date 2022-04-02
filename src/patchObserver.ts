@@ -1,4 +1,4 @@
-import { BaseRect } from "./myRect";
+import { BaseRect } from "./baseRect";
 
 export class PatchObserver {
   isPatching = false;
@@ -17,6 +17,12 @@ export class PatchObserver {
     this.outputtingObject.isPatching = false;
     this.outputtingObject.audioNode.connect(inputtingObject.audioNode);
     this.clear();
+  }
+
+  connect() {
+    for (const patch of this.patches) {
+      patch.out.audioNode.connect(patch.in.audioNode);
+    }
   }
 
   display() {

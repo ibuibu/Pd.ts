@@ -7,7 +7,7 @@ export class BaseRect {
   x = 0;
   y = 0;
   w = 60;
-  h = 30;
+  h = 40;
   isDragging = false;
   isPatching = false;
   offsetX = 0;

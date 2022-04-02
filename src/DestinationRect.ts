@@ -14,6 +14,7 @@ export class DestinationRect extends BaseRect {
   display() {
     this.baseDisplay();
     this.c.fillStyle = "black";
-    this.c.fillText("Destination", this.x, this.y + 10);
+    this.c.font = "bold 10px sans-serif"
+    this.c.fillText("Out", this.x, this.y + 10);
   }
 }

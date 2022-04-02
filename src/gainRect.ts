@@ -1,4 +1,4 @@
-import { BaseRect } from "./myRect";
+import { BaseRect } from "./baseRect";
 
 export class GainRect extends BaseRect {
   constructor(
@@ -16,6 +16,7 @@ export class GainRect extends BaseRect {
   display() {
     this.baseDisplay();
     this.c.fillStyle = "black";
+    this.c.font = "bold 10px sans-serif"
     this.c.fillText("Gain", this.x, this.y + 10);
   }
 }

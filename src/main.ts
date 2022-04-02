@@ -12,17 +12,14 @@ if (canvas.getContext) {
 
 setGlobalUtils(canvas);
 
-let r1: any;
-let r2: any;
-let r3: any;
-
-document.querySelector("#begin").addEventListener("click", () => {
+document.querySelector("#start").addEventListener("click", () => {
   const ctx = new AudioContext();
 
+  const area = document.querySelector("#control-area") as HTMLDivElement;
   const observer = new PatchObserver(c);
-  r1 = new OscillatorRect(c, ctx, observer, 10, 10);
-  r2 = new GainRect(c, ctx, observer, 100, 100);
-  r3 = new DestinationRect(c, ctx, observer, 170, 150);
+  const r1 = new OscillatorRect(c, ctx, observer, area, 10, 10);
+  const r2 = new GainRect(c, ctx, observer, 100, 100);
+  const r3 = new DestinationRect(c, ctx, observer, 170, 150);
 
   setInterval(() => {
     c.clearRect(0, 0, canvas.width, canvas.height);
@@ -33,10 +30,3 @@ document.querySelector("#begin").addEventListener("click", () => {
   }, 0);
 });
 
-document.querySelector("#play").addEventListener("click", () => {
-  r1.oscillator.start();
-});
-
-document.querySelector("#stop").addEventListener("click", () => {
-  r1.oscillator?.stop();
-});
