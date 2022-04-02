@@ -1,13 +1,13 @@
 import { PatchObserver } from "./patchObserver";
 import { isMousePressed, mouseX, mouseY } from "./globalUtil";
 
-export class MyRect {
+export class BaseRect {
   audioNode: AudioNode;
   observer: PatchObserver;
   x = 0;
   y = 0;
-  w = 50;
-  h = 50;
+  w = 60;
+  h = 30;
   isDragging = false;
   isPatching = false;
   offsetX = 0;
@@ -28,7 +28,7 @@ export class MyRect {
     this.y = y;
   }
 
-  display() {
+  baseDisplay() {
     this.base();
     this.outlet();
     this.inlet();
@@ -50,15 +50,16 @@ export class MyRect {
       } else {
         this.isDragging = false;
       }
-      this.c.fillStyle = "rgba(200, 0, 200, 0.5)";
+      // this.c.fillStyle = "rgba(200, 0, 200, 0.5)";
     } else {
-      this.c.fillStyle = "rgba(0, 0, 200, 0.5)";
+      // this.c.fillStyle = "rgba(0, 0, 200, 0.5)";
     }
     if (this.isDragging) {
       this.x = mouseX - this.offsetX;
       this.y = mouseY - this.offsetY;
     }
-    this.c.fillRect(this.x, this.y, this.w, this.h);
+    this.c.strokeRect(this.x, this.y, this.w, this.h);
+    // this.c.fillRect(this.x, this.y, this.w, this.h);
   }
 
   outletRectCorners() {

@@ -1,8 +1,8 @@
-import { MyRect } from "./myRect";
+import { BaseRect } from "./myRect";
 
 export class PatchObserver {
   isPatching = false;
-  outputtingObject?: MyRect;
+  outputtingObject?: BaseRect;
   patches = [];
 
   constructor(public c: CanvasRenderingContext2D) {}

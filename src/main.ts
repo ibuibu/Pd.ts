@@ -1,6 +1,8 @@
 import { setGlobalUtils } from "./globalUtil";
 import { PatchObserver } from "./patchObserver";
-import { MyRect } from "./myRect";
+import { DestinationRect } from "./destinationRect";
+import { GainRect } from "./gainRect";
+import { OscillatorRect } from "./oscillatorRect";
 
 const canvas = document.getElementById("tutorial") as HTMLCanvasElement;
 
@@ -10,32 +12,17 @@ if (canvas.getContext) {
 
 setGlobalUtils(canvas);
 
-let oscillator: any;
-// 再生中でtrue
-let isPlaying = false;
-
-let ctx: any;
-
-let observer: any;
 let r1: any;
 let r2: any;
 let r3: any;
 
 document.querySelector("#begin").addEventListener("click", () => {
-  ctx = new AudioContext();
-  // 再生中なら二重に再生されないようにする
-  if (isPlaying) return;
-  oscillator = ctx.createOscillator();
-  oscillator.type = "sine"; // sine, square, sawtooth, triangleがある
-  oscillator.frequency.setValueAtTime(440, ctx.currentTime); // 440HzはA4(4番目のラ)
+  const ctx = new AudioContext();
 
-  const gainNode = ctx.createGain();
-  gainNode.gain.value = 0.1;
-
-  observer = new PatchObserver(c);
-  r1 = new MyRect(c, observer, oscillator, 10, 10);
-  r2 = new MyRect(c, observer, gainNode, 100, 150);
-  r3 = new MyRect(c, observer, ctx.destination, 170, 150);
+  const observer = new PatchObserver(c);
+  r1 = new OscillatorRect(c, ctx, observer, 10, 10);
+  r2 = new GainRect(c, ctx, observer, 100, 100);
+  r3 = new DestinationRect(c, ctx, observer, 170, 150);
 
   setInterval(() => {
     c.clearRect(0, 0, canvas.width, canvas.height);
@@ -47,12 +34,9 @@ document.querySelector("#begin").addEventListener("click", () => {
 });
 
 document.querySelector("#play").addEventListener("click", () => {
-  oscillator.start();
-  isPlaying = true;
+  r1.oscillator.start();
 });
 
-// oscillatorを破棄し再生を停止する
 document.querySelector("#stop").addEventListener("click", () => {
-  oscillator?.stop();
-  isPlaying = false;
+  r1.oscillator?.stop();
 });
