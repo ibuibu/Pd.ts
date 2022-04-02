@@ -1,4 +1,4 @@
-const canvas = document.getElementById("tutorial");
+const canvas = document.getElementById("tutorial") as HTMLCanvasElement;
 
 if (canvas.getContext) {
   var c = canvas.getContext("2d");
@@ -6,15 +6,15 @@ if (canvas.getContext) {
 
 class PatchObserver {
   isPatching = false;
-  outputtingObject = {};
+  outputtingObject?: MyRect;
   patches = [];
 
-  setOutputtingObj(obj) {
+  setOutputtingObj(obj: any) {
     this.isPatching = true;
     this.outputtingObject = obj;
   }
 
-  setPatch(inputtingObject) {
+  setPatch(inputtingObject: any) {
     this.patches.push({ out: this.outputtingObject, in: inputtingObject });
     this.outputtingObject.isPatching = false;
     this.outputtingObject.audioNode.connect(inputtingObject.audioNode);
@@ -36,13 +36,13 @@ class PatchObserver {
 
   clear() {
     this.isPatching = false;
-    this.outputtingObject = {};
+    this.outputtingObject = null;
   }
 }
 
 class MyRect {
-  audioNode = {};
-  observer = {};
+  audioNode: AudioNode;
+  observer: PatchObserver;
   x = 0;
   y = 0;
   w = 50;
@@ -54,7 +54,7 @@ class MyRect {
   lineStartX = 0;
   lineStartY = 0;
 
-  constructor(observer, audioNode, x, y) {
+  constructor(observer: any, audioNode: AudioNode, x: number, y: number) {
     this.observer = observer;
     this.audioNode = audioNode;
     this.x = x;
@@ -150,18 +150,16 @@ class MyRect {
   }
 }
 
-window.AudioContext = window.AudioContext || window.webkitAudioContext;
-
-let oscillator;
+let oscillator: any;
 // 再生中でtrue
 let isPlaying = false;
 
-let ctx;
+let ctx: any;
 
-let observer;
-let r1;
-let r2;
-let r3;
+let observer: any;
+let r1: any;
+let r2: any;
+let r3: any;
 
 document.querySelector("#begin").addEventListener("click", () => {
   ctx = new AudioContext();
