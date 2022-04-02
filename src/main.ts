@@ -1,8 +1,12 @@
+import { isMousePressed, mouseX, mouseY, setGlobalUtils } from "./globalUtil";
+
 const canvas = document.getElementById("tutorial") as HTMLCanvasElement;
 
 if (canvas.getContext) {
   var c = canvas.getContext("2d");
 }
+
+setGlobalUtils(canvas);
 
 class PatchObserver {
   isPatching = false;
@@ -195,23 +199,4 @@ document.querySelector("#play").addEventListener("click", () => {
 document.querySelector("#stop").addEventListener("click", () => {
   oscillator?.stop();
   isPlaying = false;
-});
-
-// GLOBAL
-let isMousePressed = false;
-let mouseX = 0;
-let mouseY = 0;
-
-canvas.addEventListener("mousemove", (e) => {
-  var rect = canvas.getBoundingClientRect();
-  mouseX = e.clientX - rect.left;
-  mouseY = e.clientY - rect.top;
-});
-
-canvas.addEventListener("mousedown", (_e) => {
-  isMousePressed = true;
-});
-
-canvas.addEventListener("mouseup", (_e) => {
-  isMousePressed = false;
 });
