@@ -60,7 +60,7 @@ export class GainRect extends BaseRect {
     }
     const options = values.map((value) => {
       const option = document.createElement("option");
-      if (value == 0.1) {
+      if (value == this.gainValue) {
         option.selected = true;
       }
       option.value = String(value);
