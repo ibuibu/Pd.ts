@@ -55,6 +55,7 @@ export class OscillatorRect extends BaseRect {
     oscillatorNode.start();
     this.isPlaying = true;
   }
+
   stop() {
     const oscillator = this.audioNode as OscillatorNode;
     oscillator.stop();

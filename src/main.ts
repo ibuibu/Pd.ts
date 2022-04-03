@@ -18,7 +18,7 @@ document.querySelector("#start").addEventListener("click", () => {
   const area = document.querySelector("#control-area") as HTMLDivElement;
   const observer = new PatchObserver(c);
   const r1 = new OscillatorRect(c, ctx, observer, area, 10, 10);
-  const r2 = new GainRect(c, ctx, observer, 100, 100);
+  const r2 = new GainRect(c, ctx, observer, area, 100, 100);
   const r3 = new DestinationRect(c, ctx, observer, 170, 150);
 
   setInterval(() => {
@@ -29,4 +29,3 @@ document.querySelector("#start").addEventListener("click", () => {
     r3.display();
   }, 0);
 });
-
