@@ -58,7 +58,7 @@ export class BaseRect {
       this.x = mouseX - this.offsetX;
       this.y = mouseY - this.offsetY;
     }
-    this.c.strokeRect(this.x, this.y, this.w, this.h);
+    this.c.strokeRect(this.x + 1, this.y, this.w - 2, this.h);
     // this.c.fillRect(this.x, this.y, this.w, this.h);
   }
 
@@ -75,7 +75,7 @@ export class BaseRect {
     this.c.fillStyle = "black";
     const [ol, or, ot, ob] = this.outletRectCorners();
     if (ol < mouseX && mouseX < or && ot < mouseY && mouseY < ob) {
-      this.c.fillStyle = "pink";
+      this.c.fillStyle = "blue";
     }
     if (isMousePressed) {
       if (ol < mouseX && mouseX < or && ot < mouseY && mouseY < ob) {
@@ -109,7 +109,7 @@ export class BaseRect {
     this.c.fillStyle = "black";
     const [il, ir, it, ib] = this.inletRectCorners();
     if (il < mouseX && mouseX < ir && it < mouseY && mouseY < ib) {
-      this.c.fillStyle = "pink";
+      this.c.fillStyle = "blue";
       if (this.observer.isPatching) {
         this.observer.setPatch(this);
       }
