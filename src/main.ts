@@ -3,6 +3,7 @@ import { PatchObserver } from "./patchObserver";
 import { DestinationRect } from "./destinationRect";
 import { GainRect } from "./gainRect";
 import { OscillatorRect } from "./oscillatorRect";
+import {StereoPannerRect} from "./stereoPannerRect";
 
 const canvas = document.getElementById("tutorial") as HTMLCanvasElement;
 
@@ -19,7 +20,8 @@ document.querySelector("#start").addEventListener("click", () => {
   const observer = new PatchObserver(c);
   const r1 = new OscillatorRect(c, ctx, observer, area, 10, 10);
   const r2 = new GainRect(c, ctx, observer, area, 100, 100);
-  const r3 = new DestinationRect(c, ctx, observer, 170, 150);
+  const r3 = new StereoPannerRect(c, ctx, observer,area, 170, 150);
+  const r4 = new DestinationRect(c, ctx, observer, 190, 180);
 
   setInterval(() => {
     c.clearRect(0, 0, canvas.width, canvas.height);
@@ -27,5 +29,6 @@ document.querySelector("#start").addEventListener("click", () => {
     r1.display();
     r2.display();
     r3.display();
+    r4.display();
   }, 0);
 });
