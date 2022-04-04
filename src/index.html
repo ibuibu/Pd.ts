@@ -4,18 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Web Audio API</title>
+    <style type="text/css">
+      .show {
+        display: inline;
+      }
+      .hidden {
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <h1>PDJS</h1>
-    <button id="start">start</button>
     <div>
       <canvas
         id="tutorial"
-        width="300"
-        height="250"
+        width="600"
+        height="400"
         style="border: 1px solid"
       ></canvas>
     </div>
+    <button id="start">start</button>
+    <select id="rect-selector" class="hidden">
+      <option selected>Select Object</option>
+      <option value="oscillator">oscillator</option>
+      <option value="gain">gain</option>
+      <option value="panner">panner</option>
+      <option value="out">out</option>
+    </select>
     <div id="control-area"></div>
   </body>
 </html>

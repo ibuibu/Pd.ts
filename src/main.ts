@@ -3,7 +3,8 @@ import { PatchObserver } from "./patchObserver";
 import { DestinationRect } from "./destinationRect";
 import { GainRect } from "./gainRect";
 import { OscillatorRect } from "./oscillatorRect";
-import {StereoPannerRect} from "./stereoPannerRect";
+import { StereoPannerRect } from "./stereoPannerRect";
+import { BaseRect } from "./baseRect";
 
 const canvas = document.getElementById("tutorial") as HTMLCanvasElement;
 
@@ -13,22 +14,52 @@ if (canvas.getContext) {
 
 setGlobalUtils(canvas);
 
-document.querySelector("#start").addEventListener("click", () => {
-  const ctx = new AudioContext();
+const startButton = document.querySelector("#start");
+const rectSelector = document.getElementById("rect-selector");
+const area = document.querySelector("#control-area") as HTMLDivElement;
 
-  const area = document.querySelector("#control-area") as HTMLDivElement;
-  const observer = new PatchObserver(c);
-  const r1 = new OscillatorRect(c, ctx, observer, area, 10, 10);
-  const r2 = new GainRect(c, ctx, observer, area, 100, 100);
-  const r3 = new StereoPannerRect(c, ctx, observer,area, 170, 150);
-  const r4 = new DestinationRect(c, ctx, observer, 190, 180);
+let ctx: AudioContext;
+let observer: PatchObserver;
+let rects = [];
+
+rectSelector.addEventListener("change", (e: Event) => {
+  const { target } = e;
+  if (!(target instanceof HTMLSelectElement)) return;
+  let rect: BaseRect;
+  switch (target.value) {
+    case "oscillator":
+      rect = new OscillatorRect(c, ctx, observer, area, 0, 10);
+      break;
+    case "gain":
+      rect = new GainRect(c, ctx, observer, area, 0, 10);
+      break;
+    case "panner":
+      rect = new StereoPannerRect(c, ctx, observer, area, 0, 10);
+      break;
+    case "out":
+      rect = new DestinationRect(c, ctx, observer, 0, 10);
+      break;
+    default:
+      return;
+  }
+  rects.push(rect);
+
+  (rectSelector as HTMLSelectElement).options[0].selected = true;
+});
+
+startButton.addEventListener("click", () => {
+  startButton.remove();
+  rectSelector.classList.remove("hidden");
+  rectSelector.classList.add("show");
+  ctx = new AudioContext();
+
+  observer = new PatchObserver(c);
 
   setInterval(() => {
     c.clearRect(0, 0, canvas.width, canvas.height);
     observer.display();
-    r1.display();
-    r2.display();
-    r3.display();
-    r4.display();
+    rects.forEach((rect) => {
+      rect.display();
+    });
   }, 0);
 });
