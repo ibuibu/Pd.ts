@@ -55,7 +55,7 @@ export class GainRect extends BaseRect {
       (this.audioNode as GainNode).gain.value = this.gainValue;
     });
     let values = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 50; i++) {
       values.push(i / 10);
     }
     const options = values.map((value) => {
