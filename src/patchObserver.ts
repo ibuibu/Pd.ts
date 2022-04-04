@@ -1,4 +1,5 @@
 import { BaseRect } from "./baseRect";
+import { OscillatorRect } from "./oscillatorRect";
 
 export class PatchObserver {
   isPatching = false;
@@ -15,13 +16,17 @@ export class PatchObserver {
   setPatch(inputtingObject: any) {
     this.patches.push({ out: this.outputtingObject, in: inputtingObject });
     this.outputtingObject.isPatching = false;
-    this.outputtingObject.audioNode.connect(inputtingObject.audioNode);
+    this.connect();
     this.clear();
   }
 
   connect() {
     for (const patch of this.patches) {
-      patch.out.audioNode.connect(patch.in.audioNode);
+      if (patch.in instanceof OscillatorRect) {
+        patch.out.audioNode.connect(patch.in.audioNode.frequency);
+      } else {
+        patch.out.audioNode.connect(patch.in.audioNode);
+      }
     }
   }
 
