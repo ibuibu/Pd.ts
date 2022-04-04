@@ -98,7 +98,7 @@ export class BaseRect {
       this.c.lineWidth = 1;
       this.c.stroke();
     }
-    this.c.fillRect(this.x + this.w - 10, this.y + this.h, 10, 10);
+    this.c.fillRect(ol, ot, 10, 10);
   }
 
   inletRectCorners() {
