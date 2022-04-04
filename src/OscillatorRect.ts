@@ -1,10 +1,12 @@
 import { BaseRect } from "./baseRect";
 
 export class OscillatorRect extends BaseRect {
+  static DEFAULT_FREQUENCY = 440;
   isControlled = false;
   oscillatorType: OscillatorType = "sine";
   ctx: AudioContext;
   isPlaying = false;
+  frequency = OscillatorRect.DEFAULT_FREQUENCY;
 
   constructor(
     public c: CanvasRenderingContext2D,
@@ -16,7 +18,10 @@ export class OscillatorRect extends BaseRect {
   ) {
     const oscillatorNode = ctx.createOscillator();
     oscillatorNode.type = "sine"; // sine, square, sawtooth, triangle
-    oscillatorNode.frequency.setValueAtTime(440, ctx.currentTime);
+    oscillatorNode.frequency.setValueAtTime(
+      OscillatorRect.DEFAULT_FREQUENCY,
+      ctx.currentTime
+    );
     super(c, observer, oscillatorNode, x, y);
 
     this.ctx = ctx;
@@ -49,7 +54,10 @@ export class OscillatorRect extends BaseRect {
   play() {
     const oscillatorNode = this.ctx.createOscillator();
     oscillatorNode.type = this.oscillatorType;
-    oscillatorNode.frequency.setValueAtTime(440, this.ctx.currentTime);
+    oscillatorNode.frequency.setValueAtTime(
+      this.frequency,
+      this.ctx.currentTime
+    );
     this.audioNode = oscillatorNode;
     this.observer.connect();
     oscillatorNode.start();
@@ -69,6 +77,7 @@ export class OscillatorRect extends BaseRect {
     title.textContent = "Oscillator";
     controllerDiv.appendChild(title);
 
+    // oscillatorType
     const pullDown = document.createElement("select");
     pullDown.addEventListener("change", (e: Event) => {
       const { target } = e;
@@ -78,6 +87,9 @@ export class OscillatorRect extends BaseRect {
     const oscillatorTypes = ["sine", "square", "sawtooth", "triangle"];
     const options = oscillatorTypes.map((oscillatorType) => {
       const option = document.createElement("option");
+      if (oscillatorType == this.oscillatorType) {
+        option.selected = true;
+      }
       option.value = oscillatorType;
       option.textContent = oscillatorType;
       return option;
@@ -85,8 +97,32 @@ export class OscillatorRect extends BaseRect {
     options.forEach((option) => {
       pullDown.appendChild(option);
     });
-
     controllerDiv.appendChild(pullDown);
+
+    // frequency
+    const frequencyPullDown = document.createElement("select");
+    frequencyPullDown.addEventListener("change", (e: Event) => {
+      const { target } = e;
+      if (!(target instanceof HTMLSelectElement)) return;
+      this.frequency = parseInt(target.value, 10);
+    });
+    let values = [];
+    for (let i = 0; i < 10; i++) {
+      values.push(2**i );
+    }
+    const frequencyOptions = values.map((value) => {
+      const option = document.createElement("option");
+      if (value == this.frequency) {
+        option.selected = true;
+      }
+      option.value = value;
+      option.textContent = value;
+      return option;
+    });
+    frequencyOptions.forEach((option) => {
+      frequencyPullDown.appendChild(option);
+    });
+    controllerDiv.appendChild(frequencyPullDown);
 
     const playButton = document.createElement("button");
     playButton.textContent = "play";
