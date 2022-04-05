@@ -27,6 +27,7 @@ export class BaseRect {
     this.x = x;
     this.y = y;
   }
+  display(){}
 
   baseDisplay() {
     this.base();

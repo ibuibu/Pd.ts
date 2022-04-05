@@ -8,9 +8,7 @@ import { BaseRect } from "./baseRect";
 
 const canvas = document.getElementById("tutorial") as HTMLCanvasElement;
 
-if (canvas.getContext) {
-  var c = canvas.getContext("2d");
-}
+const c = canvas.getContext("2d");
 
 setGlobalUtils(canvas);
 
@@ -20,9 +18,11 @@ const area = document.querySelector("#control-area") as HTMLDivElement;
 
 let ctx: AudioContext;
 let observer: PatchObserver;
-let rects = [];
+let rects: BaseRect[] = [];
 
-rectSelector.addEventListener("change", (e: Event) => {
+rectSelector!.addEventListener("change", (e: Event) => {
+  if(c == null) return;
+
   const { target } = e;
   if (!(target instanceof HTMLSelectElement)) return;
   let rect: BaseRect;
@@ -47,10 +47,12 @@ rectSelector.addEventListener("change", (e: Event) => {
   (rectSelector as HTMLSelectElement).options[0].selected = true;
 });
 
-startButton.addEventListener("click", () => {
-  startButton.remove();
-  rectSelector.classList.remove("hidden");
-  rectSelector.classList.add("show");
+startButton!.addEventListener("click", () => {
+  if(c == null) return;
+
+  startButton!.remove();
+  rectSelector!.classList.remove("hidden");
+  rectSelector!.classList.add("show");
   ctx = new AudioContext();
 
   observer = new PatchObserver(c);

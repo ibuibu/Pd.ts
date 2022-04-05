@@ -115,8 +115,8 @@ export class OscillatorRect extends BaseRect {
       if (value == this.frequency) {
         option.selected = true;
       }
-      option.value = value;
-      option.textContent = value;
+      option.value = String(value);
+      option.textContent = String(value);
       return option;
     });
     frequencyOptions.forEach((option) => {
