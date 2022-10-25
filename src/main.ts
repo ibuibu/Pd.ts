@@ -21,7 +21,7 @@ let observer: PatchObserver;
 let rects: BaseRect[] = [];
 
 rectSelector!.addEventListener("change", (e: Event) => {
-  if(c == null) return;
+  if (c == null) return;
 
   const { target } = e;
   if (!(target instanceof HTMLSelectElement)) return;
@@ -48,9 +48,10 @@ rectSelector!.addEventListener("change", (e: Event) => {
 });
 
 startButton!.addEventListener("click", () => {
-  if(c == null) return;
+  if (c == null) return;
 
   startButton!.remove();
+  canvas.style.display = "inline";
   rectSelector!.classList.remove("hidden");
   rectSelector!.classList.add("show");
   ctx = new AudioContext();
