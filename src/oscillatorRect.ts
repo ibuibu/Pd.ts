@@ -52,6 +52,7 @@ export class OscillatorRect extends BaseRect {
 
   // もう一度oscillatorを生成して、connectもしなおす
   play() {
+    if (this.isPlaying) return;
     const oscillatorNode = this.ctx.createOscillator();
     oscillatorNode.type = this.oscillatorType;
     oscillatorNode.frequency.setValueAtTime(
