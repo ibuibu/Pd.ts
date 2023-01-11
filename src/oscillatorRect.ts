@@ -109,7 +109,7 @@ export class OscillatorRect extends BaseRect {
     });
     let values = [];
     for (let i = 0; i < 10; i++) {
-      values.push(2**i );
+      values.push(2 ** i);
     }
     const frequencyOptions = values.map((value) => {
       const option = document.createElement("option");

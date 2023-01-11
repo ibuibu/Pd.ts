@@ -2,6 +2,7 @@ import { setGlobalUtils } from "./globalUtil";
 import { PatchObserver } from "./patchObserver";
 import { DestinationRect } from "./destinationRect";
 import { GainRect } from "./gainRect";
+import { EnvelopeRect } from './envelopeRect'
 import { OscillatorRect } from "./oscillatorRect";
 import { StereoPannerRect } from "./stereoPannerRect";
 import { BaseRect } from "./baseRect";
@@ -32,6 +33,9 @@ rectSelector!.addEventListener("change", (e: Event) => {
       break;
     case "gain":
       rect = new GainRect(c, ctx, observer, area, 0, 10);
+      break;
+    case "envelope":
+      rect = new EnvelopeRect(c, ctx, observer, area, 0, 10);
       break;
     case "panner":
       rect = new StereoPannerRect(c, ctx, observer, area, 0, 10);

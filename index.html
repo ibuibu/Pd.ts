@@ -1,41 +1,41 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pd.ts</title>
-    <style type="text/css">
-      .show {
-        display: inline;
-      }
-      .hidden {
-        display: none;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Pd.ts</h1>
-    <p>A Pure Data (Pd)-like Web Applications Implemented In TypeScript.</p>
-    <p>
-      <a href="https://github.com/ibuibu/Pd.ts">GitHub</a>
-    </p>
-    <button id="start">start</button>
-    <div>
-      <canvas
-        id="tutorial"
-        width="600"
-        height="400"
-        style="border: 1px solid; display: none"
-      ></canvas>
-    </div>
-    <select id="rect-selector" class="hidden">
-      <option selected>Select Object</option>
-      <option value="oscillator">oscillator</option>
-      <option value="gain">gain</option>
-      <option value="panner">panner</option>
-      <option value="out">out</option>
-    </select>
-    <div id="control-area"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pd.ts</title>
+  <style type="text/css">
+    .show {
+      display: inline;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Pd.ts</h1>
+  <p>A Pure Data (Pd)-like Web Applications Implemented In TypeScript.</p>
+  <p>
+    <a href="https://github.com/ibuibu/Pd.ts">GitHub</a>
+  </p>
+  <button id="start">start</button>
+  <div>
+    <canvas id="tutorial" width="600" height="400" style="border: 1px solid; display: none"></canvas>
+  </div>
+  <select id="rect-selector" class="hidden">
+    <option selected>Select Object</option>
+    <option value="oscillator">oscillator</option>
+    <option value="gain">gain</option>
+    <option value="envelope">envelope</option>
+    <option value="panner">panner</option>
+    <option value="out">out</option>
+  </select>
+  <div id="control-area"></div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
 </html>
