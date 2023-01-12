@@ -9,9 +9,9 @@ type Patch = {
 export class PatchObserver {
   isPatching = false;
   outputtingObject?: BaseRect;
-  patches:Patch[] = [];
+  patches: Patch[] = [];
 
-  constructor(public c: CanvasRenderingContext2D) {}
+  constructor(public c: CanvasRenderingContext2D) { }
 
   setOutputtingObj(obj: BaseRect) {
     this.isPatching = true;
@@ -19,8 +19,9 @@ export class PatchObserver {
   }
 
   setPatch(inputtingObject: BaseRect) {
-    this.patches.push({ out: this.outputtingObject!, in: inputtingObject });
-    this.outputtingObject!.isPatching = false;
+    if (this.outputtingObject == null) return;
+    this.patches.push({ out: this.outputtingObject, in: inputtingObject });
+    this.outputtingObject.isPatching = false;
     this.connect();
     this.clear();
   }
@@ -37,9 +38,11 @@ export class PatchObserver {
 
   display() {
     for (const patch of this.patches) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const [_, or, __, ob] = patch.out.outletRectCorners();
       this.c.beginPath();
       this.c.moveTo(or, ob);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const [il, ___, it, ____] = patch.in.inletRectCorners();
       this.c.lineTo(il, it);
       this.c.strokeStyle = "black";

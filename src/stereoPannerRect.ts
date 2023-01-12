@@ -1,4 +1,5 @@
 import { BaseRect } from "./baseRect";
+import { PatchObserver } from "./patchObserver";
 
 export class StereoPannerRect extends BaseRect {
   static TITLE = "Panner";
@@ -9,7 +10,7 @@ export class StereoPannerRect extends BaseRect {
   constructor(
     public c: CanvasRenderingContext2D,
     ctx: AudioContext,
-    observer: any,
+    observer: PatchObserver,
     public area: HTMLDivElement,
     x: number,
     y: number
@@ -52,7 +53,7 @@ export class StereoPannerRect extends BaseRect {
       this.panValue = Number(target.value);
       (this.audioNode as StereoPannerNode).pan.value = this.panValue;
     });
-    let values = [];
+    const values = [];
     for (let i = -10; i < 11; i++) {
       values.push(i / 10);
     }

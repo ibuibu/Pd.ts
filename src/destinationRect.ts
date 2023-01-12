@@ -1,10 +1,11 @@
 import { BaseRect } from "./baseRect";
+import { PatchObserver } from "./patchObserver";
 
 export class DestinationRect extends BaseRect {
   constructor(
     public c: CanvasRenderingContext2D,
     ctx: AudioContext,
-    observer: any,
+    observer: PatchObserver,
     x: number,
     y: number
   ) {

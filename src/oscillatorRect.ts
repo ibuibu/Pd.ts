@@ -1,4 +1,5 @@
 import { BaseRect } from "./baseRect";
+import { PatchObserver } from "./patchObserver";
 
 export class OscillatorRect extends BaseRect {
   static DEFAULT_FREQUENCY = 440;
@@ -11,7 +12,7 @@ export class OscillatorRect extends BaseRect {
   constructor(
     public c: CanvasRenderingContext2D,
     ctx: AudioContext,
-    observer: any,
+    observer: PatchObserver,
     public area: HTMLDivElement,
     x: number,
     y: number

@@ -17,7 +17,7 @@ export class BaseRect {
 
   constructor(
     public c: CanvasRenderingContext2D,
-    observer: any,
+    observer: PatchObserver,
     audioNode: AudioNode,
     x: number,
     y: number
@@ -27,7 +27,8 @@ export class BaseRect {
     this.x = x;
     this.y = y;
   }
-  display(){}
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  display() { }
 
   baseDisplay() {
     this.base();

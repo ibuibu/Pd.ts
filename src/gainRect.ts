@@ -1,4 +1,5 @@
 import { BaseRect } from "./baseRect";
+import { PatchObserver } from "./patchObserver";
 
 export class GainRect extends BaseRect {
   static DEFAULT_GAIN_VALUE = 0.1;
@@ -10,7 +11,7 @@ export class GainRect extends BaseRect {
   constructor(
     public c: CanvasRenderingContext2D,
     ctx: AudioContext,
-    observer: any,
+    observer: PatchObserver,
     public area: HTMLDivElement,
     x: number,
     y: number
@@ -54,7 +55,7 @@ export class GainRect extends BaseRect {
       this.gainValue = Number(target.value);
       (this.audioNode as GainNode).gain.value = this.gainValue;
     });
-    let values = [];
+    const values = [];
     for (let i = 0; i < 50; i++) {
       values.push(i / 10);
     }
